@@ -16,7 +16,7 @@
 9- Buscar producto por nombre
 10- Filtrar productos por precio
 */
-/************Ale************/
+/************Ale*************/
 /*
 11- Ordenar productos
 12- Mostrar pagina del catalogo
