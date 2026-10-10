@@ -24,3 +24,11 @@
 14- Calcular total
 15- Salir
 */
+
+const productos = [
+  { id: 1, nombre: "Mouse", precio: 15000, stock: 10 },
+  { id: 2, nombre: "Teclado", precio: 25000, stock: 8 },
+  { id: 3, nombre: "Monitor", precio: 120000, stock: 5 },
+  { id: 4, nombre: "Auriculares", precio: 18000, stock: 12 },
+  { id: 5, nombre: "Notebook", precio: 750000, stock: 3 },
+];
