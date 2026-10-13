@@ -33,15 +33,17 @@ const productos = [
   { id: 5, nombre: "Notebook", precio: 750000, stock: 3 },
 ];
 
-const carrito = ["w", "a", "s"];
+const carrito = [{ id: 1, nombre: "Mouse", precio: 15000, stock: 10 },
+  { id: 2, nombre: "Teclado", precio: 25000, stock: 8 },
+  { id: 3, nombre: "Monitor", precio: 120000, stock: 5 },];
 
 /* ELIMINAR DEL CARRITO O DEL PRODUCTO? */
 const eliminarProducto = () => {
   let idProductoEliminar = Number(
     prompt("Ingresar el id del producto que se quiere eliminar"),
   );
-  if (carrito.some((p) => p.id === idProductoEliminar)) {
-    let productoEliminado = carrito.splice(idProductoEliminar - 1, 1);
+  if (productos.some((p) => p.id === idProductoEliminar)) {
+    let productoEliminado = productos.splice(idProductoEliminar - 1, 1);
     alert(`Producto eliminado: ${productoEliminado[0].nombre}`);
   } else {
     alert(
@@ -73,7 +75,7 @@ const buscarProducto = () => {
   let existe = productos.some((p) => p.nombre.toLowerCase() === nombre);
 
   if (existe === true) {
-    let productoEncontrado = productos.find((p) => p.nombre === nombre);
+    let productoEncontrado = productos.find((p) => p.nombre.toLowerCase() === nombre);
     alert(`El producto es ${productoEncontrado.nombre}
       Id: ${productoEncontrado.id}
       Precio: ${productoEncontrado.precio}
@@ -100,3 +102,34 @@ const filtrarProductosPrecio = () => {
     alert("El precio ingresado es menor que el precio de cualquier producto");
   }
 };
+
+let bandera = true;
+while (bandera === true) {
+  let input = Number(
+    prompt(`Ingresar un número
+6- Eliminar producto
+7- Quitar ultimo producto
+8- Quitar primer producto
+9- Buscar producto por nombre
+10- Filtrar productos por precio`),
+  );
+  switch (input) {
+    case 6:
+      eliminarProducto();
+      break;
+    case 7:
+      quitarUltimoProducto();
+      break;
+    case 8:
+      quitarPrimerProducto();
+      break;
+    case 9:
+      buscarProducto();
+      break;
+    case 10:
+      filtrarProductosPrecio();
+      break;
+    default:
+      alert("Ingresar una opción válida");
+  }
+}
