@@ -32,3 +32,71 @@ const productos = [
   { id: 4, nombre: "Auriculares", precio: 18000, stock: 12 },
   { id: 5, nombre: "Notebook", precio: 750000, stock: 3 },
 ];
+
+const carrito = ["w", "a", "s"];
+
+/* ELIMINAR DEL CARRITO O DEL PRODUCTO? */
+const eliminarProducto = () => {
+  let idProductoEliminar = Number(
+    prompt("Ingresar el id del producto que se quiere eliminar"),
+  );
+  if (carrito.some((p) => p.id === idProductoEliminar)) {
+    let productoEliminado = carrito.splice(idProductoEliminar - 1, 1);
+    alert(`Producto eliminado: ${productoEliminado[0].nombre}`);
+  } else {
+    alert(
+      "El id ingresado no concuerda con ningun producto",
+    ); /* en el carrito? */
+  }
+};
+
+const quitarUltimoProducto = () => {
+  if (carrito.length === 0) {
+    alert("No hay productos para eliminar en el carrito");
+  } else {
+    let productoEliminado = carrito.pop();
+    alert(`El producto eliminado es: ${productoEliminado.nombre}`);
+  }
+};
+
+const quitarPrimerProducto = () => {
+  if (carrito.length === 0) {
+    alert("No hay productos para eliminar en el carrito");
+  } else {
+    let productoEliminado = carrito.shift();
+    alert(`El primer producto eliminado es: ${productoEliminado.nombre}`);
+  }
+};
+
+const buscarProducto = () => {
+  let nombre = prompt("Ingresar el nombre de un producto").toLowerCase().trim();
+  let existe = productos.some((p) => p.nombre.toLowerCase() === nombre);
+
+  if (existe === true) {
+    let productoEncontrado = productos.find((p) => p.nombre === nombre);
+    alert(`El producto es ${productoEncontrado.nombre}
+      Id: ${productoEncontrado.id}
+      Precio: ${productoEncontrado.precio}
+      Stock: ${productoEncontrado.stock}`);
+  } else {
+    alert("El nombre ingresado no concuerda con ningún producto");
+  }
+};
+
+const filtrarProductosPrecio = () => {
+  /* pregunto un rango? o que muestre los productos menores que/// 1 o 2 variables */
+  let precio = Number(prompt("Mostrar productos hasta un precio de:"));
+  let precioComprobacion = productos.some((p) => p.precio <= precio);
+  if (precioComprobacion === true) {
+    let productosFiltrados = productos.filter((p) => p.precio <= precio);
+    productosFiltrados.forEach((p) => {
+      alert(`Productos con precio menor o igual a ${precio}
+      Nombre ${p.nombre}
+      Id: ${p.id}
+      Precio: ${p.precio}
+      Stock: ${p.stock}`);
+    });
+  } else {
+    alert("El precio ingresado es menor que el precio de cualquier producto");
+  }
+};
