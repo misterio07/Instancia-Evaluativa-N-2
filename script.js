@@ -33,7 +33,8 @@ const productos = [
   { id: 5, nombre: "Notebook", precio: 750000, stock: 3 },
 ];
 
-const carrito = [{ id: 1, nombre: "Mouse", precio: 15000, stock: 10 },
+const carrito = [
+  { id: 1, nombre: "Mouse", precio: 15000, stock: 10 },
   { id: 2, nombre: "Teclado", precio: 25000, stock: 8 },
   { id: 3, nombre: "Monitor", precio: 120000, stock: 5 },];
 
@@ -42,13 +43,13 @@ const eliminarProducto = () => {
   let idProductoEliminar = Number(
     prompt("Ingresar el id del producto que se quiere eliminar"),
   );
-  if (productos.some((p) => p.id === idProductoEliminar)) {
-    let productoEliminado = productos.splice(idProductoEliminar - 1, 1);
+  if (carrito.some((p) => p.id === idProductoEliminar)) {
+    let productoEliminado = carrito.splice(idProductoEliminar - 1, 1);
     alert(`Producto eliminado: ${productoEliminado[0].nombre}`);
   } else {
     alert(
-      "El id ingresado no concuerda con ningun producto",
-    ); /* en el carrito? */
+      "El id ingresado no concuerda con ningun producto en el carrito",
+    );
   }
 };
 
