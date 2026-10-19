@@ -1,0 +1,11 @@
+
+h1{
+    text-align: center;
+}
+#resultado, #carrito{
+    background-color: rgb(148, 98, 98);
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    gap: 5px
+}
