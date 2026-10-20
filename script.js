@@ -38,7 +38,6 @@ const productos = [
 
 const carrito = [];
 
-/* ELIMINAR DEL CARRITO O DEL PRODUCTO? */
 const eliminarProducto = () => {
   let idProductoEliminar = Number(
     prompt("Ingresar el id del producto que se quiere eliminar"),
@@ -87,7 +86,6 @@ const buscarProducto = () => {
 };
 
 const filtrarProductosPrecio = () => {
-  /* pregunto un rango? o que muestre los productos menores que/// 1 o 2 variables */
   let precio = Number(prompt("Mostrar productos hasta un precio de:"));
   let precioComprobacion = productos.some((p) => p.precio <= precio);
   if (precioComprobacion === true) {
