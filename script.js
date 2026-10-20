@@ -36,10 +36,7 @@ const productos = [
   { id: 8, nombre: "Silla Gamer", precio: 210000, stock: 4 }
 ];
 
-const carrito = [
-  { id: 1, nombre: "Mouse", precio: 15000, stock: 10 },
-  { id: 2, nombre: "Teclado", precio: 25000, stock: 8 },
-  { id: 3, nombre: "Monitor", precio: 120000, stock: 5 },];
+const carrito = [];
 
 /* ELIMINAR DEL CARRITO O DEL PRODUCTO? */
 const eliminarProducto = () => {
