@@ -31,6 +31,9 @@ const productos = [
   { id: 3, nombre: "Monitor", precio: 120000, stock: 5 },
   { id: 4, nombre: "Auriculares", precio: 18000, stock: 12 },
   { id: 5, nombre: "Notebook", precio: 750000, stock: 3 },
+  { id: 6, nombre: "Webcam", precio: 32000, stock: 7 },
+  { id: 7, nombre: "Mousepad XL", precio: 9500, stock: 15 },
+  { id: 8, nombre: "Silla Gamer", precio: 210000, stock: 4 }
 ];
 
 const carrito = [
