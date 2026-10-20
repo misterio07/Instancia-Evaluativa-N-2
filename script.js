@@ -48,15 +48,9 @@ function ordenarProductos(productos) {
         return;
     }
 
-    productosOrdenados.forEach(function(producto) {
-        console.log(
-            producto.id +
-            " - " +
-            producto.nombre +
-            " - $" +
-            producto.precio
-        );
-    });
+ productosOrdenados.forEach(function(producto) {
+    console.log(`${producto.id} - ${producto.nombre} - $${producto.precio}`);
+});
 }
 
 /////////////////////////////////////////////////////////////////////////////MOSTRAR PAGINA 
