@@ -102,6 +102,11 @@ const filtrarProductosPrecio = () => {
   }
 };
 
+function salir(){
+    bandera = false;
+    alert("Saliste del del sistema")
+}
+
 let bandera = true;
 while (bandera === true) {
   let input = Number(
@@ -110,7 +115,12 @@ while (bandera === true) {
 7- Quitar ultimo producto
 8- Quitar primer producto
 9- Buscar producto por nombre
-10- Filtrar productos por precio`),
+10- Filtrar productos por precio
+11- Ordenar productos
+12- Mostrar pagina del catalogo
+13- Validar carrito //si esta vacio o no!!!
+14- Calcular total
+15- Salir`),
   );
   switch (input) {
     case 6:
@@ -128,6 +138,17 @@ while (bandera === true) {
     case 10:
       filtrarProductosPrecio();
       break;
+    case 11:
+        ordenarProductos();
+        break;
+    case 12:
+        mostrarPagina();
+    case 13:
+        validarCarrito();
+    case 14:
+        calcularTotal();
+    case 15:
+        salir();
     default:
       alert("Ingresar una opción válida");
   }
