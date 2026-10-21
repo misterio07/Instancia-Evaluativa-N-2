@@ -39,33 +39,37 @@ const productos = [
 ];
 
 
-const carrito = [{ nombre: "Mouse", precio: 1000, cantidad: 1 }];
+const carrito = [{ nombre: "Mouse", precio: 15000, cantidad: 1 }];
 /*mostrar productos*/
 function mostrarProductos(array) {
-  const producto = array.map(a => `<div>Nombre: ${a.nombre} 
+  const producto = array.map(a => `Nombre: ${a.nombre} 
 Precio: $${a.precio}
-Stock: ${a.stock} </div>`).join("");
+Stock: ${a.stock} `).join("\n----\n");
 
   const element = document.getElementById("resultado");
 
   element.innerHTML = producto;
   console.log(producto);
+  alert(producto);
 };
 /*mostrar carrito */
 
 function mostrarCarrito(array) {
-  const producto = array.map(a => `<div>Nombre: ${a.nombre} 
-Precio: $${a.precio}
-Cantidad: ${a.cantidad} </div>`).join("");
+  const producto = array.map(a => `Nombre: ${a.nombre} 
+Precio: $${(a.precio*a.cantidad)}
+Cantidad: ${a.cantidad} `).join("\n----\n");
 
   const element = document.getElementById("carrito");
 
   element.innerHTML = producto;
+  alert(producto);
 }
 
 /*Agregar Producto al carrito */
 function agregarProducto(productoEncontrado, posicion) {
-  const indice = carrito.findIndex(p => p.id === productoEncontrado.id);
+  const pro = productos.find(a=>  a.nombre === productoEncontrado)
+  
+  const indice = carrito.findIndex(p => p.id === pro.id);
 
   if (indice !== -1) {
     carrito[indice].cantidad++;
@@ -76,9 +80,9 @@ function agregarProducto(productoEncontrado, posicion) {
     }
   } else {
     const nuevoProducto = {
-      id: productoEncontrado.id,
-      nombre: productoEncontrado.nombre,
-      precio: productoEncontrado.precio,
+      id: pro.id,
+      nombre: pro.nombre,
+      precio: pro.precio,
       cantidad: 1
     };
 
@@ -88,6 +92,8 @@ function agregarProducto(productoEncontrado, posicion) {
       carrito.push(nuevoProducto);
     }
   }
+  mostrarCarrito(carrito)
+  
 }
 function modificarCantidad(nombre, nuevaCantidad) {
   const producto = carrito.find(p => p.nombre === nombre);
@@ -101,22 +107,15 @@ function modificarCantidad(nombre, nuevaCantidad) {
   } else {
     console.log("Producto no encontrado en el carrito");
   }
+  mostrarCarrito(carrito);
 }
 
 
-
+/* 
 mostrarProductos(productos);
 mostrarCarrito(carrito);
-
-/*16/10
-23/10/ was y were examen
-30/10 simples pass
-13/11 irregulares
-20/11 leccion evaluativa verevos regulares y regulares afirmativa
-27/11 notas cargadas 
-
+ 
  */
-
 
 const eliminarProducto = () => {
   let idProductoEliminar = Number(
@@ -191,6 +190,11 @@ let bandera = true;
 while (bandera === true) {
   let input = Number(
     prompt(`Ingresar un número
+1- Mostrar Productos 
+2- Agregar Prodcuto
+3- Agregar Producto al inicio
+4- Mostrar Carrito
+5- Modificar Carrito
 6- Eliminar producto
 7- Quitar ultimo producto
 8- Quitar primer producto
@@ -203,6 +207,56 @@ while (bandera === true) {
 15- Salir`),
   );
   switch (input) {
+    case 1:
+      mostrarProductos(productos);
+      break;
+    case 2:
+       do {
+        let productoEncontrado = prompt("ingresa el nombre del producto");
+        flag = true
+      const comparar = productos.some(a=> a.nombre === productoEncontrado)
+      if(comparar){
+        agregarProducto(productoEncontrado, "final");
+        flag=false
+      }else {
+        alert("el nombre del producto no existe")
+      }
+      } while (flag);
+      
+       
+      break;
+    case 3:
+      do {
+         let productoEncontrado = prompt("ingresa el nombre del producto");
+        flag=true
+      const comparar = productos.some(a=> a.nombre === productoEncontrado)
+        if(comparar){
+        agregarProducto(productoEncontrado, "inicio");
+        flag=false
+      }else {
+        alert("el nombre del producto no existe")
+      }
+        
+      } while (flag);
+     
+      break;
+    case 4:
+      mostrarCarrito(carrito);
+      break;
+    case 5:
+      do {
+          const name= prompt("Ingresa el nombre del producto a modificar");
+          const comparar = carrito.some(a=> a.nombre === name);
+          flag=true
+          if(comparar){
+            const cantidad= Number(prompt("ingresa la cantidad deseada"));
+             modificarCantidad(name,cantidad);
+             flag=false
+          }
+     
+      } while (flag);
+      
+      break;
     case 6:
       eliminarProducto();
       break;
