@@ -43,7 +43,7 @@ const productos = [
 const carrito = [{ nombre: "Mouse", precio: 15000, cantidad: 1 }];
 /*mostrar productos*/
 function mostrarProductos(array) {
-  const producto = array.map(a => `Id= ${a.id}
+  const producto = array.map(a => `Id: ${a.id}
 Nombre: ${a.nombre} 
 Precio: $${a.precio}
 Stock: ${a.stock} `).join("\n----\n");
