@@ -29,33 +29,37 @@
 
 
 const productos = [
-  { id: 1, nombre: "Mouse", precio: 15000, stock: 10 },
-  { id: 2, nombre: "Teclado", precio: 25000, stock: 8 },
-  { id: 3, nombre: "Monitor", precio: 120000, stock: 5 },
-  { id: 4, nombre: "Auriculares", precio: 18000, stock: 12 },
-  { id: 5, nombre: "Notebook", precio: 750000, stock: 3 },
-  { id: 6, nombre: "Webcam", precio: 32000, stock: 7 },
-  { id: 7, nombre: "Mousepad XL", precio: 9500, stock: 15 },
-  { id: 8, nombre: "Silla Gamer", precio: 210000, stock: 4 }
+  { id: 1, nombre: "Mouse", precio: 15000, stock: 10,img:"https://imgs.search.brave.com/cicVwve4HqCqpwRvsJUmeqe6R4k30C5DF1LC5Vo9ThI/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzY5MTUyNi1NTEEx/MDQ3Nzk3OTY3NjJf/MDEyMDI2LUUud2Vi/cA" },
+  { id: 2, nombre: "Teclado", precio: 25000, stock: 8,img:"https://imgs.search.brave.com/D4xOUwwVTpwNwq367ojk35izh_n4wzn_PGiuGRnCeQY/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/bWFnbmlmaWMuY29t/L2ZvdG9zLXByZW1p/dW0vdGVjbGFkby1n/YW1pbmctbWVjYW5p/Y28tcmdiLW5lZ3Jv/Xzk3ODkxNC0zNDAz/Ni5qcGc_c2VtdD1h/aXNfdGVzdF9iJnc9/NzQwJnE9ODA" },
+  { id: 3, nombre: "Monitor", precio: 120000, stock: 5,img:"https://imgs.search.brave.com/rMB1uMQ0R2sCqLP21KujDVA8Ooaq4pIyLFFzd7hGkgM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzczOTYwMS1NTEEx/MTA3ODk0NTQwOTJf/MDUyMDI2LUUud2Vi/cA" },
+  { id: 4, nombre: "Auriculares", precio: 18000, stock: 12,img:"https://imgs.search.brave.com/UzQraB3LkiwR_w15kTnPrY3zyuPQiAH15MZOje-yASs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/Lm1heGltdXMuY29t/LmFyL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDI2LzA0L0F1cmlj/dWxhci1nYW1lci1S/ZWRyYWdvbi1aZXVz/LUg1MTAtUkdCLTEw/MjR4NTk3LmpwZw" },
+  { id: 5, nombre: "Notebook", precio: 750000, stock: 3,img:"https://imgs.search.brave.com/9W33uG5OnBybDlziBS7SIdk6jZgiNzxOFvGa9YfQDzQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hci1t/ZWRpYS5ocHRpZW5k/YWVubGluZWEuY29t/L2NhdGFsb2cvcHJv/ZHVjdC9jYWNoZS8z/MTRkZWM4OWIzMjE5/OTQxNzA3YWQ2MmNj/YzkwZTU4NS9CL1Qv/QlQ0RjVMQV8xSW1h/Z2VuUHJpbmNpcGFs/Q29uVGV4dG9fYy5q/cGc" },
+  { id: 6, nombre: "Webcam", precio: 32000, stock: 7,img:"https://imgs.search.brave.com/w1LUEjNUvIX3uzv4193FuwGCdXIDgVHD9Uod8zV3BEQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NjF4K2xOeTQrckwu/anBn" },
+  { id: 7, nombre: "Mousepad XL", precio: 9500, stock: 15,img:"https://imgs.search.brave.com/TKAd1ii_JAQq14oRPXg7ibwqSQbKuCa9U7micvQQEbA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzYxMTY0OS1NTEE5/MTk0MTAxNTUyOF8w/OTIwMjUtVi53ZWJw" },
+  { id: 8, nombre: "Silla Gamer", precio: 210000, stock: 4,img:"https://imgs.search.brave.com/LuQ0QVgraRYK88-7GI-WQxUqLbMybtzKEJbnwlrecGc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/bWVnYXRvbmUubmV0/L2ltYWdlcy9BcnRp/Y3Vsb3MvMzQ5LzE4/My9USi96b29tL01L/VDAzVEpJVEItMS53/ZWJwP3ZlcnNpb249/MzU" }
 ];
 
 
 const carrito = [{id: 1, nombre: "Mouse", precio: 15000, cantidad: 1 }];
 /*mostrar productos*/
 function mostrarProductos(array) {
-  const producto = array.map(a => `Id: ${a.id}
-Nombre: ${a.nombre} 
-Precio: $${a.precio}
-Stock: ${a.stock} `).join("\n----\n");
+  const producto = array.map(a => `<div class="border p-2 rounded-xl p-1 flex flex-col justify-between h-full"><img src=${a.img} class="object-cover">
+    Nombre: ${a.nombre} <br>
+Precio: $${a.precio}<br>
+Stock: ${a.stock} 
+<div class="text-center mt-4">
+<botton class="self-center border rounded-xl  p-1" >Agregar al carrito</button>
+</div>
+</div>`).join("");
 
   const element = document.getElementById("resultado");
 
   element.innerHTML = producto;
   console.log(producto);
-  alert(producto);
+  
 };
 /*mostrar carrito */
-
+mostrarProductos(productos)
 function mostrarCarrito(array) {
   const producto = array.map(a => `Id: ${a.id}
 Nombre: ${a.nombre} 
@@ -95,7 +99,7 @@ function agregarProducto(productoEncontrado, posicion) {
       carrito.push(nuevoProducto);
     }
   }
-  mostrarCarrito(carrito)
+ /* mostrarCarrito(carrito)*/
   
 }
 function modificarCantidad(nombre, nuevaCantidad) {
@@ -335,8 +339,8 @@ function calcularTotal(carrito) {
     alert("Total de la compra: $" + total.toFixed(2));
 
     return total;
-}
-let bandera = true;
+} 
+let bandera = false;
 while (bandera === true) {
   let input = Number(
     prompt(`Ingresar un número
@@ -437,3 +441,4 @@ while (bandera === true) {
       alert("Ingresar una opción válida");
   }
 }
+ 
