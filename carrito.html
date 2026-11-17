@@ -8,16 +8,21 @@
         <title>Carrito</title>
     </head>
     <body>
-        <nav class="flex flex-row bg-yellow-500">
+        <nav class="flex flex-row bg-yellow-400 justify-around items-center gap-2 h-9">
             <a href="./index.html">Inicio</a><!--icono del lugar o volver al inicio-->
-            <div>
-                <input type="text">
-                <button>icono buscar</button>
-            </div>
-            <select ></select>
+            <form class="flex-grow-1 flex flex-row justify-between gap-2">
+                <input type="text" class="w-5/6 bg-white rounded-sm">
+                <button type="submit">icono buscar</button>
+            </form>
+            <select class="text-center">
+                <option value="Todos">Todos</option>
+                <option value="0-25000">0 - 25000</option>
+                <option value="25000-100000">25000 - 100000</option>
+                <option value="100000-300000">100000 - 300000</option>
+            </select>
         </nav>
         <main>
-            <section class="grid-cols-3 bg-green-500">
+            <section class="grid-cols-3" id="carrito">
                 <p>a</p>
             </section>
         </main>

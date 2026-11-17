@@ -42,8 +42,8 @@ const productos = [
 
 const carrito = [{id: 1, nombre: "Mouse", precio: 15000, cantidad: 1 }];
 /*mostrar productos*/
-function mostrarProductos(array) {
-  const producto = array.map(a => `<div class="border p-2 rounded-xl p-1 flex flex-col justify-between h-full"><img src=${a.img} class="object-cover">
+/* function mostrarProductos(array) {
+  const producto = array.map((a) => `<div class="border p-2 rounded-xl p-1 flex flex-col justify-between h-full"><img src=${a.img} class="object-cover">
     Nombre: ${a.nombre} <br>
 Precio: $${a.precio}<br>
 Stock: ${a.stock} 
@@ -53,23 +53,28 @@ Stock: ${a.stock}
 </div>`).join("");
 
   const element = document.getElementById("resultado");
-
   element.innerHTML = producto;
   console.log(producto);
   
-};
+}; */
+const mostrarProductos = () => {};
 /*mostrar carrito */
 mostrarProductos(productos)
+
 function mostrarCarrito(array) {
-  const producto = array.map(a => `Id: ${a.id}
-Nombre: ${a.nombre} 
-Precio: $${(a.precio*a.cantidad)}
-Cantidad: ${a.cantidad} `).join("\n----\n");
+  const producto = array.map(a => `<div class="border p-2 rounded-xl p-1 flex flex-col justify-between h-full"><img src=${a.img} class="object-cover">
+    Nombre: ${a.nombre} <br>
+Precio: $${a.precio}<br>
+Stock: ${a.stock} 
+<div class="text-center mt-4">
+<botton class="self-center border rounded-xl  p-1" >Agregar al carrito</button>
+</div>
+</div>`).join("");
 
   const element = document.getElementById("carrito");
+  const newElement = document.createElement("div")
 
   element.innerHTML = producto;
-  alert(producto);
 }
 
 /*Agregar Producto al carrito */
@@ -442,3 +447,8 @@ while (bandera === true) {
   }
 }
  
+const sectionCarrito = document.querySelector("main section #carrito");
+
+if(sectionCarrito !== undefined){
+  mostrarCarrito(carrito)
+}
