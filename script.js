@@ -40,9 +40,11 @@ const productos = [
 ];
 
 
-const carrito = [{id: 1, nombre: "Mouse", precio: 15000, cantidad: 1 }];
+const carrito = [{ id: 1, nombre: "Mouse", precio: 15000, stock: 10,img:"https://imgs.search.brave.com/cicVwve4HqCqpwRvsJUmeqe6R4k30C5DF1LC5Vo9ThI/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzY5MTUyNi1NTEEx/MDQ3Nzk3OTY3NjJf/MDEyMDI2LUUud2Vi/cA" },
+  { id: 2, nombre: "Teclado", precio: 25000, stock: 8,img:"https://imgs.search.brave.com/D4xOUwwVTpwNwq367ojk35izh_n4wzn_PGiuGRnCeQY/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/bWFnbmlmaWMuY29t/L2ZvdG9zLXByZW1p/dW0vdGVjbGFkby1n/YW1pbmctbWVjYW5p/Y28tcmdiLW5lZ3Jv/Xzk3ODkxNC0zNDAz/Ni5qcGc_c2VtdD1h/aXNfdGVzdF9iJnc9/NzQwJnE9ODA" },
+  { id: 3, nombre: "Monitor", precio: 120000, stock: 5,img:"https://imgs.search.brave.com/rMB1uMQ0R2sCqLP21KujDVA8Ooaq4pIyLFFzd7hGkgM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzczOTYwMS1NTEEx/MTA3ODk0NTQwOTJf/MDUyMDI2LUUud2Vi/cA" }];
 /*mostrar productos*/
-/* function mostrarProductos(array) {
+function mostrarProductos(array) {
   const producto = array.map((a) => `<div class="border p-2 rounded-xl p-1 flex flex-col justify-between h-full"><img src=${a.img} class="object-cover">
     Nombre: ${a.nombre} <br>
 Precio: $${a.precio}<br>
@@ -56,25 +58,30 @@ Stock: ${a.stock}
   element.innerHTML = producto;
   console.log(producto);
   
-}; */
-const mostrarProductos = () => {};
+};
+
 /*mostrar carrito */
-mostrarProductos(productos)
+const element = document.getElementById("resultado");
+if(element){
+  mostrarProductos(productos)
+}
 
 function mostrarCarrito(array) {
   const producto = array.map(a => `<div class="border p-2 rounded-xl p-1 flex flex-col justify-between h-full"><img src=${a.img} class="object-cover">
     Nombre: ${a.nombre} <br>
 Precio: $${a.precio}<br>
-Stock: ${a.stock} 
+Cantidad: ${a.stock} 
 <div class="text-center mt-4">
-<botton class="self-center border rounded-xl  p-1" >Agregar al carrito</button>
+<button class="self-center border rounded-xl  p-1" >Eliminar</button>
 </div>
-</div>`).join("");
+</div>`).join("");/* Cantidad a comprar */
 
   const element = document.getElementById("carrito");
+  element.innerHTML = "";
   const newElement = document.createElement("div")
-
-  element.innerHTML = producto;
+  newElement.className="grid grid-cols-3 gap-4";
+  newElement.innerHTML = producto;
+  element.appendChild(newElement);
 }
 
 /*Agregar Producto al carrito */
@@ -448,7 +455,4 @@ while (bandera === true) {
 }
  
 const sectionCarrito = document.querySelector("main section #carrito");
-
-if(sectionCarrito !== undefined){
-  mostrarCarrito(carrito)
-}
+mostrarCarrito(carrito)
