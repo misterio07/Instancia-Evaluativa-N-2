@@ -67,12 +67,12 @@ if(element){
 }
 
 function mostrarCarrito(array) {
-  const producto = array.map(a => `<div class="border p-2 rounded-xl p-1 flex flex-col justify-between h-full"><img src=${a.img} class="object-cover">
+  const producto = array.map(a => `<div id=${a.id} class="border p-2 rounded-xl flex flex-col justify-between h-full tarjeta"><img src=${a.img} class="object-cover">
     Nombre: ${a.nombre} <br>
 Precio: $${a.precio}<br>
 Cantidad: ${a.stock} 
 <div class="text-center mt-4">
-<button class="self-center border rounded-xl  p-1" >Eliminar</button>
+<button class="self-center border rounded-xl  p-1 eliminar" >Eliminar</button>
 </div>
 </div>`).join("");/* Cantidad a comprar */
 
@@ -82,6 +82,7 @@ Cantidad: ${a.stock}
   newElement.className="grid grid-cols-3 gap-4";
   newElement.innerHTML = producto;
   element.appendChild(newElement);
+  botonEliminar()
 }
 
 /*Agregar Producto al carrito */
@@ -135,18 +136,22 @@ mostrarProductos(productos);
 mostrarCarrito(carrito);
  
  */
+const botonEliminar = () => {
+  const botones = document.querySelectorAll(".eliminar");
+  botones.forEach((b) => {
+    b.addEventListener("click", (e) => {
+      const tarjeta = e.target.closest(".tarjeta");
+      eliminarProducto(tarjeta.id)
+    })
+  })
+  
+}
 
-const eliminarProducto = () => {
-  let idProductoEliminar = Number(
-    prompt("Ingresar el id del producto que se quiere eliminar"),
-  );
-  if (carrito.some((p) => p.id === idProductoEliminar)) {
-    let productoEliminado = carrito.splice(idProductoEliminar - 1, 1);
-    alert(`Producto eliminado: ${productoEliminado[0].nombre}`);
-  } else {
-    alert(
-      "El id ingresado no concuerda con ningun producto en el carrito",
-    );
+const eliminarProducto = (id) => {
+  let idProductoEliminar = id
+  if (carrito.some((p) => p.id == idProductoEliminar)) {
+    carrito.splice(idProductoEliminar - 1, 1);
+    mostrarCarrito(carrito)
   }
 };
 
