@@ -55,9 +55,7 @@ Stock: ${a.stock}
 </div>`).join("");
 
   const element = document.getElementById("resultado");
-  element.innerHTML = producto;
-  console.log(producto);
-  
+  element.innerHTML = producto; 
 };
 
 /*mostrar carrito */
@@ -142,6 +140,7 @@ const botonEliminar = () => {
     b.addEventListener("click", (e) => {
       const tarjeta = e.target.closest(".tarjeta");
       eliminarProducto(tarjeta.id)
+      console.log(tarjeta.id)
     })
   })
   
@@ -150,7 +149,9 @@ const botonEliminar = () => {
 const eliminarProducto = (id) => {
   let idProductoEliminar = id
   if (carrito.some((p) => p.id == idProductoEliminar)) {
-    carrito.splice(idProductoEliminar - 1, 1);
+    const producto = carrito.find(p => p.id == idProductoEliminar)
+    const lugar = carrito.indexOf(producto)
+    carrito.splice(lugar, 1);
     mostrarCarrito(carrito)
   }
 };
@@ -188,21 +189,23 @@ const buscarProducto = () => {
   }
 };
 
-const filtrarProductosPrecio = () => {
-  let precio = Number(prompt("Mostrar productos hasta un precio de:"));
-  let precioComprobacion = productos.some((p) => p.precio <= precio);
-  if (precioComprobacion === true) {
-    let productosFiltrados = productos.filter((p) => p.precio <= precio);
-    productosFiltrados.forEach((p) => {
-      alert(`Productos con precio menor o igual a ${precio}
-      Nombre ${p.nombre}
-      Id: ${p.id}
-      Precio: ${p.precio}
-      Stock: ${p.stock}`);
-    });
-  } else {
-    alert("El precio ingresado es menor que el precio de cualquier producto");
-  }
+const select = document.getElementById("filtro")
+if(select){
+  select.addEventListener("change", () => {
+    if(select.value === "Todos"){
+      mostrarCarrito(carrito);
+    }else{
+      const corte = select.value.indexOf("-");
+      const min = select.value.slice(0,corte)
+      const max = select.value.slice(corte+1,select.value.length)
+      filtrarProductosPrecio(min,max)
+    }
+  })
+}
+
+const filtrarProductosPrecio = (min, max) => {
+  const productosFiltrados = carrito.filter((p) => p.precio <= max && p.precio >= min);
+  mostrarCarrito(productosFiltrados)
 };
 
 function salir(){
