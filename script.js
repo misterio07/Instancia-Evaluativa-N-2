@@ -55,7 +55,8 @@ Stock: ${a.stock}
 </div>`).join("");
 
   const element = document.getElementById("resultado");
-  element.innerHTML = producto; 
+  if(element){element.innerHTML = "";
+  element.innerHTML = producto; }
 };
 
 /*mostrar carrito */
@@ -65,6 +66,11 @@ if(element){
 }
 
 function mostrarCarrito(array) {
+  console.log(p.classList)
+  if(!p.classList.contains("hidden")){
+    p.classList.add("hidden")
+    console.log("se hizo")
+  }
   const producto = array.map(a => `<div id=${a.id} class="border p-2 rounded-xl flex flex-col justify-between h-full tarjeta"><img src=${a.img} class="object-cover">
     Nombre: ${a.nombre} <br>
 Precio: $${a.precio}<br>
@@ -173,23 +179,29 @@ const quitarPrimerProducto = () => {
     alert(`El primer producto eliminado es: ${productoEliminado.nombre}`);
   }
 };
-
-const buscarProducto = () => {
-  let nombre = prompt("Ingresar el nombre de un producto").toLowerCase().trim();
+const p = document.getElementById("mensaje-error")
+const form = document.querySelector("form")
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nombre = e.target[0].value.toLowerCase().trim();
+    e.target[0].value = "";
+    buscarProducto(nombre)
+})
+const buscarProducto = (nombre) => {
   let existe = productos.some((p) => p.nombre.toLowerCase() === nombre);
 
   if (existe === true) {
-    let productoEncontrado = productos.find((p) => p.nombre.toLowerCase() === nombre);
-    alert(`El producto es ${productoEncontrado.nombre}
-      Id: ${productoEncontrado.id}
-      Precio: ${productoEncontrado.precio}
-      Stock: ${productoEncontrado.stock}`);
+    const productoEncontrado = [productos.find((p) => p.nombre.toLowerCase() === nombre)];
+    mostrarCarrito(productoEncontrado)
   } else {
-    alert("El nombre ingresado no concuerda con ningún producto");
+    mostrarCarrito([]);
+    p.textContent = "El nombre ingresado no concuerda con ningún producto";
+    p.classList.remove("hidden")
   }
 };
 
-const select = document.getElementById("filtro")
+const select = document.getElementById("filtro-carrito")
+
 if(select){
   select.addEventListener("change", () => {
     if(select.value === "Todos"){
@@ -198,14 +210,32 @@ if(select){
       const corte = select.value.indexOf("-");
       const min = select.value.slice(0,corte)
       const max = select.value.slice(corte+1,select.value.length)
-      filtrarProductosPrecio(min,max)
+      filtrarProductosPrecio(min, max, carrito)
     }
   })
-}
+}else{
+  const select = document.getElementById("filtro-inicio")
+  select.addEventListener("change", () => {
+    if(select.value === "Todos"){
+      mostrarProductos(productos);
+    }else{
+      const corte = select.value.indexOf("-");
+      const min = select.value.slice(0,corte)
+      const max = select.value.slice(corte+1,select.value.length)
+      filtrarProductosPrecio(min, max, productos)
+    }
+  })
+}/* y el carrito del inicio tmb? */
 
-const filtrarProductosPrecio = (min, max) => {
-  const productosFiltrados = carrito.filter((p) => p.precio <= max && p.precio >= min);
-  mostrarCarrito(productosFiltrados)
+
+const filtrarProductosPrecio = (min, max, array) => {
+  const productosFiltrados = array.filter((p) => p.precio <= max && p.precio >= min);
+  console.log(select)
+  if(select !== null){
+    mostrarCarrito(productosFiltrados)
+  }else{
+    mostrarProductos(productosFiltrados)
+  } 
 };
 
 function salir(){
