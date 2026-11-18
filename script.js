@@ -48,7 +48,7 @@ function mostrarProductos(array) {
 Precio: $${a.precio}<br>
 Stock: ${a.stock} 
 <div class="text-center mt-4">
-<botton class="self-center border rounded-xl  p-1" >Agregar al carrito</button>
+<botton class="self-center border rounded-xl  pr-2 pl-2 pb-1 bg-yellow-300 hover:bg-yellow-500" >Agregar</button>
 </div>
 </div>`).join("");
 
