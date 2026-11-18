@@ -40,10 +40,12 @@ const productos = [
 ];
 
 
-const carrito = [{id: 1, nombre: "Mouse", precio: 15000, cantidad: 1 }];
+const carrito = [{ id: 1, nombre: "Mouse", precio: 15000, stock: 10,img:"https://imgs.search.brave.com/cicVwve4HqCqpwRvsJUmeqe6R4k30C5DF1LC5Vo9ThI/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzY5MTUyNi1NTEEx/MDQ3Nzk3OTY3NjJf/MDEyMDI2LUUud2Vi/cA" },
+  { id: 2, nombre: "Teclado", precio: 25000, stock: 8,img:"https://imgs.search.brave.com/D4xOUwwVTpwNwq367ojk35izh_n4wzn_PGiuGRnCeQY/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/bWFnbmlmaWMuY29t/L2ZvdG9zLXByZW1p/dW0vdGVjbGFkby1n/YW1pbmctbWVjYW5p/Y28tcmdiLW5lZ3Jv/Xzk3ODkxNC0zNDAz/Ni5qcGc_c2VtdD1h/aXNfdGVzdF9iJnc9/NzQwJnE9ODA" },
+  { id: 3, nombre: "Monitor", precio: 120000, stock: 5,img:"https://imgs.search.brave.com/rMB1uMQ0R2sCqLP21KujDVA8Ooaq4pIyLFFzd7hGkgM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzczOTYwMS1NTEEx/MTA3ODk0NTQwOTJf/MDUyMDI2LUUud2Vi/cA" }];
 /*mostrar productos*/
 function mostrarProductos(array) {
-  const producto = array.map(a => `<div class="border p-2 rounded-xl p-1 flex flex-col justify-between h-full"><img src=${a.img} class="object-cover">
+  const producto = array.map((a) => `<div class="border p-2 rounded-xl p-1 flex flex-col justify-between h-full"><img src=${a.img} class="object-cover">
     Nombre: ${a.nombre} <br>
 Precio: $${a.precio}<br>
 Stock: ${a.stock} 
@@ -53,23 +55,32 @@ Stock: ${a.stock}
 </div>`).join("");
 
   const element = document.getElementById("resultado");
-
-  element.innerHTML = producto;
-  console.log(producto);
-  
+  element.innerHTML = producto; 
 };
+
 /*mostrar carrito */
-mostrarProductos(productos)
+const element = document.getElementById("resultado");
+if(element){
+  mostrarProductos(productos)
+}
+
 function mostrarCarrito(array) {
-  const producto = array.map(a => `Id: ${a.id}
-Nombre: ${a.nombre} 
-Precio: $${(a.precio*a.cantidad)}
-Cantidad: ${a.cantidad} `).join("\n----\n");
+  const producto = array.map(a => `<div id=${a.id} class="border p-2 rounded-xl flex flex-col justify-between h-full tarjeta"><img src=${a.img} class="object-cover">
+    Nombre: ${a.nombre} <br>
+Precio: $${a.precio}<br>
+Cantidad: ${a.stock} 
+<div class="text-center mt-4">
+<button class="self-center border rounded-xl  p-1 eliminar" >Eliminar</button>
+</div>
+</div>`).join("");/* Cantidad a comprar */
 
   const element = document.getElementById("carrito");
-
-  element.innerHTML = producto;
-  alert(producto);
+  element.innerHTML = "";
+  const newElement = document.createElement("div")
+  newElement.className="grid grid-cols-3 gap-4";
+  newElement.innerHTML = producto;
+  element.appendChild(newElement);
+  botonEliminar()
 }
 
 /*Agregar Producto al carrito */
@@ -123,18 +134,25 @@ mostrarProductos(productos);
 mostrarCarrito(carrito);
  
  */
+const botonEliminar = () => {
+  const botones = document.querySelectorAll(".eliminar");
+  botones.forEach((b) => {
+    b.addEventListener("click", (e) => {
+      const tarjeta = e.target.closest(".tarjeta");
+      eliminarProducto(tarjeta.id)
+      console.log(tarjeta.id)
+    })
+  })
+  
+}
 
-const eliminarProducto = () => {
-  let idProductoEliminar = Number(
-    prompt("Ingresar el id del producto que se quiere eliminar"),
-  );
-  if (carrito.some((p) => p.id === idProductoEliminar)) {
-    let productoEliminado = carrito.splice(idProductoEliminar - 1, 1);
-    alert(`Producto eliminado: ${productoEliminado[0].nombre}`);
-  } else {
-    alert(
-      "El id ingresado no concuerda con ningun producto en el carrito",
-    );
+const eliminarProducto = (id) => {
+  let idProductoEliminar = id
+  if (carrito.some((p) => p.id == idProductoEliminar)) {
+    const producto = carrito.find(p => p.id == idProductoEliminar)
+    const lugar = carrito.indexOf(producto)
+    carrito.splice(lugar, 1);
+    mostrarCarrito(carrito)
   }
 };
 
@@ -171,21 +189,23 @@ const buscarProducto = () => {
   }
 };
 
-const filtrarProductosPrecio = () => {
-  let precio = Number(prompt("Mostrar productos hasta un precio de:"));
-  let precioComprobacion = productos.some((p) => p.precio <= precio);
-  if (precioComprobacion === true) {
-    let productosFiltrados = productos.filter((p) => p.precio <= precio);
-    productosFiltrados.forEach((p) => {
-      alert(`Productos con precio menor o igual a ${precio}
-      Nombre ${p.nombre}
-      Id: ${p.id}
-      Precio: ${p.precio}
-      Stock: ${p.stock}`);
-    });
-  } else {
-    alert("El precio ingresado es menor que el precio de cualquier producto");
-  }
+const select = document.getElementById("filtro")
+if(select){
+  select.addEventListener("change", () => {
+    if(select.value === "Todos"){
+      mostrarCarrito(carrito);
+    }else{
+      const corte = select.value.indexOf("-");
+      const min = select.value.slice(0,corte)
+      const max = select.value.slice(corte+1,select.value.length)
+      filtrarProductosPrecio(min,max)
+    }
+  })
+}
+
+const filtrarProductosPrecio = (min, max) => {
+  const productosFiltrados = carrito.filter((p) => p.precio <= max && p.precio >= min);
+  mostrarCarrito(productosFiltrados)
 };
 
 function salir(){
@@ -442,3 +462,5 @@ while (bandera === true) {
   }
 }
  
+const sectionCarrito = document.querySelector("main section #carrito");
+mostrarCarrito(carrito)
