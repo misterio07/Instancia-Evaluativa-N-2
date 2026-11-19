@@ -3,26 +3,26 @@
 
 /********Guille***********/
 /*
-1- Mostrar productos
-2- Agregar producto
-3- Agregar producto al inicio
-4- Mostrar carrito
-5- Modificar cantidad
+1- Mostrar productos --- modificar Stilos tarjeta
+2- Agregar producto --- Guille
+3- Agregar producto al inicio --NO VA
+4- Mostrar carrito --------------iVO
+5- Modificar cantidad ----------iVO
 */
 /************Ivo************/
 /*
-6- Eliminar producto
-7- Quitar ultimo producto
-8- Quitar primer producto
-9- Buscar producto por nombre
-10- Filtrar productos por precio
+6- Eliminar producto  ----iVO
+7- Quitar ultimo producto----- NO VA
+8- Quitar primer producto----- NO VA
+9- Buscar producto por nombre ---iVO
+10- Filtrar productos por precio --- iVO
 */
 /************Ale*************/
 /*
-11- Ordenar productos
-12- Mostrar pagina del catalogo
-13- Validar carrito //si esta vacio o no!!!
-14- Calcular total
+11- Ordenar productos ----No va
+12- Mostrar pagina del catalogo---- No va
+13- Validar carrito //si esta vacio o no!!! esta va con mostrar carrito
+14- Calcular total --- va con mostrar carrito
 15- Salir
 */
 
@@ -58,7 +58,7 @@ Stock: ${a.stock}
   element.innerHTML = producto; 
 };
 
-/*mostrar carrito */
+/*mostrar carrito   falta validacion de carrito!!!!*/ 
 const element = document.getElementById("resultado");
 if(element){
   mostrarProductos(productos)
@@ -83,9 +83,9 @@ Cantidad: ${a.stock}
   botonEliminar()
 }
 
-/*Agregar Producto al carrito */
-function agregarProducto(productoEncontrado, posicion) {
-  const pro = productos.find(a=>  a.nombre === productoEncontrado)
+/*Agregar Producto al carrito  termina Guille*/
+function agregarProducto(id) {
+  const pro = productos.find(a=>  a.id === id)
   
   const indice = carrito.findIndex(p => p.id === pro.id);
 
@@ -101,7 +101,8 @@ function agregarProducto(productoEncontrado, posicion) {
       id: pro.id,
       nombre: pro.nombre,
       precio: pro.precio,
-      cantidad: 1
+      cantidad: 1,
+      img :pro.img
     };
 
     if (posicion === "inicio") {
@@ -113,6 +114,8 @@ function agregarProducto(productoEncontrado, posicion) {
  /* mostrarCarrito(carrito)*/
   
 }
+
+
 function modificarCantidad(nombre, nuevaCantidad) {
   const producto = carrito.find(p => p.nombre === nombre);
 
@@ -156,7 +159,7 @@ const eliminarProducto = (id) => {
   }
 };
 
-const quitarUltimoProducto = () => {
+/* const quitarUltimoProducto = () => {
   if (carrito.length === 0) {
     alert("No hay productos para eliminar en el carrito");
   } else {
@@ -172,7 +175,7 @@ const quitarPrimerProducto = () => {
     let productoEliminado = carrito.shift();
     alert(`El primer producto eliminado es: ${productoEliminado.nombre}`);
   }
-};
+}; */
 
 const buscarProducto = () => {
   let nombre = prompt("Ingresar el nombre de un producto").toLowerCase().trim();
@@ -208,10 +211,10 @@ const filtrarProductosPrecio = (min, max) => {
   mostrarCarrito(productosFiltrados)
 };
 
-function salir(){
+/* function salir(){
     bandera = false;
     alert("Saliste del del sistema")
-}
+} */
 //////////////////////////////////////////////ORDENAR PRODUCTOS
 
 function ordenarProductos(productos) {
@@ -271,7 +274,7 @@ function ordenarProductos(productos) {
 // case 12:
 //     mostrarPagina(productos);    
 //     break;
-
+/* 
 function mostrarPagina(productos) {
 
     let pagina = Number(prompt("Ingrese el número de página:"));
@@ -308,7 +311,7 @@ function mostrarPagina(productos) {
 
     });
 }
-
+ */
 
 ////////////////////////////////////////////////////////////////////////////////VALIDAR CARRITO
 
@@ -316,7 +319,7 @@ function mostrarPagina(productos) {
 // case 13:
 //     validarCarrito(carrito);
 //     break;
-
+/* 
 function validarCarrito(carrito) {
 
     if (carrito.length === 0) {
@@ -342,7 +345,7 @@ function validarCarrito(carrito) {
         return true;
     }
 }
-
+ */
 /////////////////////////////////////////////////////////////////////////CALCULAR TOTAL
 
 function calcularTotal(carrito) {
