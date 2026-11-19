@@ -18,11 +18,28 @@
             </svg>
             <div class="contador">0</div>
         </a>
+        <select class="text-center w-1/5 mr-1 sm:w-1/6 lg:w-1/7" id="filtro-inicio">
+                <option value="Todos">Todos</option>
+                <option value="0-25000">0 - 25000</option>
+                <option value="25000-100000">25000 - 100000</option>
+                <option value="100000-300000">100000 - 300000</option>
+        </select>
+        <form class="flex-grow-1 flex flex-row justify-between gap-2" id="form-inicio">
+                <input type="text" class="w-full bg-white rounded-sm">
+                <button type="submit" class="px-4 py-1 border-l hover:cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                </button>
+        </form>
     </nav>
   <section> <h1>Productos</h1> 
+    <p class="hidden text-center text-xl font-medium" id="mensaje-error"></p>
     <div id="resultado" class="grid grid-cols-3 md:grid-cols-5 sm:grid-cols-4 gap-3  m-5 "></div>
     </section>
-
+    
     <div class="carrito"> 
         <h2>Carrito</h2>
         <div id="carrito"></div>

@@ -44,7 +44,12 @@ const carrito = [{ id: 1, nombre: "Mouse", precio: 15000, stock: 10,img:"https:/
   { id: 2, nombre: "Teclado", precio: 25000, stock: 8,img:"https://imgs.search.brave.com/D4xOUwwVTpwNwq367ojk35izh_n4wzn_PGiuGRnCeQY/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/bWFnbmlmaWMuY29t/L2ZvdG9zLXByZW1p/dW0vdGVjbGFkby1n/YW1pbmctbWVjYW5p/Y28tcmdiLW5lZ3Jv/Xzk3ODkxNC0zNDAz/Ni5qcGc_c2VtdD1h/aXNfdGVzdF9iJnc9/NzQwJnE9ODA" },
   { id: 3, nombre: "Monitor", precio: 120000, stock: 5,img:"https://imgs.search.brave.com/rMB1uMQ0R2sCqLP21KujDVA8Ooaq4pIyLFFzd7hGkgM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzczOTYwMS1NTEEx/MTA3ODk0NTQwOTJf/MDUyMDI2LUUud2Vi/cA" }];
 /*mostrar productos*/
+const p = document.getElementById("mensaje-error")
 function mostrarProductos(array) {
+  if(!p.classList.contains("hidden")){
+    p.classList.add("hidden")
+    console.log("se hizo")
+  }
   const producto = array.map((a) => `<div class="border p-2 rounded-xl p-1 flex flex-col justify-between h-full"><img src=${a.img} class="object-cover">
     Nombre: ${a.nombre} <br>
 Precio: $${a.precio}<br>
@@ -55,7 +60,8 @@ Stock: ${a.stock}
 </div>`).join("");
 
   const element = document.getElementById("resultado");
-  element.innerHTML = producto; 
+  if(element){element.innerHTML = "";
+  element.innerHTML = producto; }
 };
 
 /*mostrar carrito   falta validacion de carrito!!!!*/ 
@@ -65,6 +71,10 @@ if(element){
 }
 
 function mostrarCarrito(array) {
+  if(!p.classList.contains("hidden")){
+    p.classList.add("hidden")
+    console.log("se hizo")
+  }
   const producto = array.map(a => `<div id=${a.id} class="border p-2 rounded-xl flex flex-col justify-between h-full tarjeta"><img src=${a.img} class="object-cover">
     Nombre: ${a.nombre} <br>
 Precio: $${a.precio}<br>
@@ -146,7 +156,6 @@ const botonEliminar = () => {
       console.log(tarjeta.id)
     })
   })
-  
 }
 
 const eliminarProducto = (id) => {
@@ -166,9 +175,9 @@ const eliminarProducto = (id) => {
     let productoEliminado = carrito.pop();
     alert(`El producto eliminado es: ${productoEliminado.nombre}`);
   }
-};
+}; */
 
-const quitarPrimerProducto = () => {
+/* const quitarPrimerProducto = () => {
   if (carrito.length === 0) {
     alert("No hay productos para eliminar en el carrito");
   } else {
@@ -177,22 +186,47 @@ const quitarPrimerProducto = () => {
   }
 }; */
 
-const buscarProducto = () => {
-  let nombre = prompt("Ingresar el nombre de un producto").toLowerCase().trim();
-  let existe = productos.some((p) => p.nombre.toLowerCase() === nombre);
 
-  if (existe === true) {
-    let productoEncontrado = productos.find((p) => p.nombre.toLowerCase() === nombre);
-    alert(`El producto es ${productoEncontrado.nombre}
-      Id: ${productoEncontrado.id}
-      Precio: ${productoEncontrado.precio}
-      Stock: ${productoEncontrado.stock}`);
-  } else {
-    alert("El nombre ingresado no concuerda con ningún producto");
+const form = document.getElementById("form-carrito")
+if(form){
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nombre = e.target[0].value.toLowerCase().trim();
+    e.target[0].value = "";
+    buscarProducto(nombre, carrito)
+  })  
+}else{
+  const form = document.getElementById("form-inicio")
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nombre = e.target[0].value.toLowerCase().trim();
+    e.target[0].value = "";
+    buscarProducto(nombre, productos)
+  }) 
+}
+  
+const buscarProducto = (nombre, array) => {
+  let existe = array.some((p) => p.nombre.toLowerCase() === nombre);
+
+  if (existe === true && array === carrito) {
+    const productoEncontrado = [array.find((p) => p.nombre.toLowerCase() === nombre)];
+    mostrarCarrito(productoEncontrado)
+  }else if(existe === true && array === productos){
+    const productoEncontrado = [array.find((p) => p.nombre.toLowerCase() === nombre)];
+    mostrarProductos(productoEncontrado)
+  } else if(existe === false && array === carrito){
+    mostrarCarrito([]);
+    p.textContent = "El nombre ingresado no concuerda con ningún producto";
+    p.classList.remove("hidden");
+  }else{
+    mostrarProductos([]);
+    p.textContent = "El nombre ingresado no concuerda con ningún producto";
+    p.classList.remove("hidden");
   }
 };
 
-const select = document.getElementById("filtro")
+const select = document.getElementById("filtro-carrito")
+
 if(select){
   select.addEventListener("change", () => {
     if(select.value === "Todos"){
@@ -201,14 +235,31 @@ if(select){
       const corte = select.value.indexOf("-");
       const min = select.value.slice(0,corte)
       const max = select.value.slice(corte+1,select.value.length)
-      filtrarProductosPrecio(min,max)
+      filtrarProductosPrecio(min, max, carrito)
     }
   })
-}
+}else{
+  const select = document.getElementById("filtro-inicio")
+  select.addEventListener("change", () => {
+    if(select.value === "Todos"){
+      mostrarProductos(productos);
+    }else{
+      const corte = select.value.indexOf("-");
+      const min = select.value.slice(0,corte)
+      const max = select.value.slice(corte+1,select.value.length)
+      filtrarProductosPrecio(min, max, productos)
+    }
+  })
+}/* y el carrito del inicio tmb? */
 
-const filtrarProductosPrecio = (min, max) => {
-  const productosFiltrados = carrito.filter((p) => p.precio <= max && p.precio >= min);
-  mostrarCarrito(productosFiltrados)
+const filtrarProductosPrecio = (min, max, array) => {
+  const productosFiltrados = array.filter((p) => p.precio <= max && p.precio >= min);
+  console.log(select)
+  if(select !== null){
+    mostrarCarrito(productosFiltrados)
+  }else{
+    mostrarProductos(productosFiltrados)
+  } 
 };
 
 /* function salir(){
@@ -363,7 +414,7 @@ function calcularTotal(carrito) {
 
     return total;
 } 
-let bandera = false;
+/* let bandera = false;
 while (bandera === true) {
   let input = Number(
     prompt(`Ingresar un número
@@ -463,7 +514,5 @@ while (bandera === true) {
     default:
       alert("Ingresar una opción válida");
   }
-}
- 
-const sectionCarrito = document.querySelector("main section #carrito");
+} */
 mostrarCarrito(carrito)
