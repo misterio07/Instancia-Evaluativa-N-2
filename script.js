@@ -7,7 +7,7 @@
 2- Agregar producto --- Guille
 3- Agregar producto al inicio --NO VA
 4- Mostrar carrito --------------iVO 
-5- Modificar cantidad ----------iVO
+5- Modificar cantidad ----------Guille!!!! 
 */
 /************Ivo************/
 /*
