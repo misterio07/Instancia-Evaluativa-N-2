@@ -6,12 +6,12 @@
 1- Mostrar productos --- modificar Stilos tarjeta
 2- Agregar producto --- Guille
 3- Agregar producto al inicio --NO VA
-4- Mostrar carrito --------------iVO
+4- Mostrar carrito --------------iVO 
 5- Modificar cantidad ----------iVO
 */
 /************Ivo************/
 /*
-6- Eliminar producto  ----iVO
+6- Eliminar producto  ---- iVO boton para sumar y restar
 7- Quitar ultimo producto----- NO VA
 8- Quitar primer producto----- NO VA
 9- Buscar producto por nombre ---iVO
@@ -83,14 +83,16 @@ Cantidad: ${a.stock}
 <button class="self-center border rounded-xl  p-1 eliminar" >Eliminar</button>
 </div>
 </div>`).join("");/* Cantidad a comprar */
-
+  
   const element = document.getElementById("carrito");
+  if(element){
   element.innerHTML = "";
   const newElement = document.createElement("div")
   newElement.className="grid grid-cols-3 gap-4";
   newElement.innerHTML = producto;
   element.appendChild(newElement);
   botonEliminar()
+  }
 }
 
 /*Agregar Producto al carrito  termina Guille*/
@@ -125,8 +127,8 @@ function agregarProducto(id) {
   
 }
 
-
-function modificarCantidad(nombre, nuevaCantidad) {
+/*modificar Ivo sumar y restar producto */
+ function modificarCantidad(nombre, nuevaCantidad) {
   const producto = carrito.find(p => p.nombre === nombre);
 
   if (producto) {
@@ -139,7 +141,7 @@ function modificarCantidad(nombre, nuevaCantidad) {
     console.log("Producto no encontrado en el carrito");
   }
   mostrarCarrito(carrito);
-}
+} 
 
 
 /* 
@@ -267,7 +269,7 @@ const filtrarProductosPrecio = (min, max, array) => {
     alert("Saliste del del sistema")
 } */
 //////////////////////////////////////////////ORDENAR PRODUCTOS
-
+/*Guille completar y agregar */
 function ordenarProductos(productos) {
 
     let opcionOrden = Number(prompt(`
