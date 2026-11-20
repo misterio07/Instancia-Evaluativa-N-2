@@ -50,14 +50,24 @@ function mostrarProductos(array) {
     p.classList.add("hidden")
     console.log("se hizo")
   }
-  const producto = array.map((a) => `<div class="border p-2 rounded-xl p-1 flex flex-col justify-between h-full"><img src=${a.img} class="object-cover">
-    Nombre: ${a.nombre} <br>
-Precio: $${a.precio}<br>
-Stock: ${a.stock} 
-<div class="text-center mt-4">
-<botton class="self-center border rounded-xl  pr-2 pl-2 pb-1 bg-yellow-300 hover:bg-yellow-500" >Agregar</button>
-</div>
-</div>`).join("");
+  const producto = array.map((a) => `<div class="border rounded-xl p-3 flex flex-col h-[350px] w-[220px] justify-between shadow-md hover:scale-105 hover:border-yellow-400 transition-all duration-300">
+      <div class="bg-white">
+      <img src="${a.img}" 
+      class="w-full h-[160px] object-contain rounded-lg">
+      </div>
+      <div class="flex flex-col gap-2 mt-3">
+        <h3 class="font-bold text-lg">${a.nombre}</h3>
+        <p class="text-gray-700">Precio: $${a.precio}</p>
+        <p class="text-gray-600">Stock: ${a.stock}</p>
+      </div>
+
+      <div class="text-center mt-3">
+        <button class="border rounded-xl px-4 py-1 bg-blue-400 hover:bg-blue-600">
+          Agregar
+        </button>
+      </div>
+
+    </div>`).join("");
 
   const element = document.getElementById("resultado");
   if(element){element.innerHTML = "";
@@ -229,7 +239,7 @@ const buscarProducto = (nombre, array) => {
 
 const select = document.getElementById("filtro-carrito")
 
-if(select){
+ if(select){
   select.addEventListener("change", () => {
     if(select.value === "Todos"){
       mostrarCarrito(carrito);
@@ -251,7 +261,7 @@ if(select){
       const max = select.value.slice(corte+1,select.value.length)
       filtrarProductosPrecio(min, max, productos)
     }
-  })
+  }) 
 }/* y el carrito del inicio tmb? */
 
 const filtrarProductosPrecio = (min, max, array) => {

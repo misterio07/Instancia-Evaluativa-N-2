@@ -7,39 +7,92 @@
     <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
-<body>
-    <nav>
-        <a href="#resultado">Productos</a> 
-        <a href="./carrito.html">Carrito 
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="8" cy="21" r="1"/>
-                <circle cx="19" cy="21" r="1" />
-                <path d="M2.5 5.5h1.612.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 16H6"/>
-            </svg>
-            <div class="contador">0</div>
-        </a>
-        <select class="text-center w-1/5 mr-1 sm:w-1/6 lg:w-1/7" id="filtro-inicio">
-                <option value="Todos">Todos</option>
-                <option value="0-25000">0 - 25000</option>
-                <option value="25000-100000">25000 - 100000</option>
-                <option value="100000-300000">100000 - 300000</option>
-        </select>
-        <form class="flex-grow-1 flex flex-row justify-between gap-2" id="form-inicio">
-                <input type="text" class="w-full bg-white rounded-sm">
-                <button type="submit" class="px-4 py-1 border-l hover:cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
-                </button>
-        </form>
-    </nav>
-  <section> <h1>Productos</h1> 
-    <p class="hidden text-center text-xl font-medium" id="mensaje-error"></p>
-    <div id="resultado" class="grid grid-cols-3 md:grid-cols-5 sm:grid-cols-4 gap-3  m-5 "></div>
-    </section>
+<body class="bg-gray-100">
     
+<nav class="flex flex-wrap items-center justify-between gap-4 p-4 bg-gray-800 text-white ">
+
+    <!-- Enlaces -->
+    <div class="flex items-center gap-5">
+        <a href="#resultado" class="hover:text-yellow-300 transition-colors">
+            Productos
+        </a>
+
+       
+
+
+    </div>
+
+    <!-- Filtro y buscador -->
+    <div class="flex flex-1 flex-wrap items-center justify-end gap-3 min-w-[250px]">
+
+       
+
+        <form class="flex flex-1 min-w-[180px] max-w-md gap-2" id="form-inicio">
+
+            <input type="text" 
+                class="w-full min-w-0 bg-white text-black rounded-md px-3 py-2"
+                placeholder="Buscar producto...">
+
+            <button type="submit"
+                class="px-3 py-2 bg-yellow-400 text-black rounded-md hover:bg-yellow-500 transition-colors">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+                </svg>
+
+            </button>
+        </form>
+        <a href="./carrito.html"
+   class="flex items-center gap-2 hover:text-yellow-300 transition-colors">
+
+   
+
+    <span class="relative inline-flex">
+
+        <!-- Icono del carrito -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="27" height="27"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <circle cx="9" cy="21" r="1"/>
+            <circle cx="19" cy="21" r="1"/>
+            <path d="M2 3h2l2.5 12.5a2 2 0 0 0 2 1.5h9.8a2 2 0 0 0 2-1.5L22 8H5"/>
+        </svg>
+
+        <!-- Contador -->
+        <span class="contador absolute -top-2 -right-2 min-w-[17px] h-[17px] 
+                     flex items-center justify-center rounded-full 
+                     bg-red-500 text-white text-[10px] font-bold px-1">
+            0
+        </span>
+
+    </span>
+</a>
+    </div>
+</nav>
+<main>
+  <section class="p-2 "> 
+     <div class="text-end mr-5 mb-5">
+    <select class="text-center w-full sm:w-auto bg-white text-black rounded-md p-2"
+            id="filtro-inicio">
+            <option value="Todos">Todos</option>
+            <option value="0-25000">0 - 25000</option>
+            <option value="25000-100000">25000 - 100000</option>
+            <option value="100000-300000">100000 - 300000</option>
+        </select>
+    </div>
+    <p class="hidden text-center text-xl font-medium" id="mensaje-error"></p>
+    <div id="resultado" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 justify-items-center max-w-6xl mx-auto p-3"></div>
+    </section>
+    </main>
     
     <script src="script.js"></script>
 </body>
