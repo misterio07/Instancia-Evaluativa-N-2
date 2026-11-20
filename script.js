@@ -44,11 +44,11 @@ const carrito = [{ id: 1, nombre: "Mouse", precio: 15000, stock: 10,img:"https:/
   { id: 2, nombre: "Teclado", precio: 25000, stock: 8,img:"https://imgs.search.brave.com/D4xOUwwVTpwNwq367ojk35izh_n4wzn_PGiuGRnCeQY/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/bWFnbmlmaWMuY29t/L2ZvdG9zLXByZW1p/dW0vdGVjbGFkby1n/YW1pbmctbWVjYW5p/Y28tcmdiLW5lZ3Jv/Xzk3ODkxNC0zNDAz/Ni5qcGc_c2VtdD1h/aXNfdGVzdF9iJnc9/NzQwJnE9ODA" },
   { id: 3, nombre: "Monitor", precio: 120000, stock: 5,img:"https://imgs.search.brave.com/rMB1uMQ0R2sCqLP21KujDVA8Ooaq4pIyLFFzd7hGkgM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzczOTYwMS1NTEEx/MTA3ODk0NTQwOTJf/MDUyMDI2LUUud2Vi/cA" }];
 /*mostrar productos*/
+
 const p = document.getElementById("mensaje-error")
 function mostrarProductos(array) {
-  if(!p.classList.contains("hidden")){
-    p.classList.add("hidden")
-    console.log("se hizo")
+  if(!p.classList.contains("invisible")){
+    p.classList.add("invisible")
   }
   const producto = array.map((a) => `<div class="border p-2 rounded-xl p-1 flex flex-col justify-between h-full"><img src=${a.img} class="object-cover">
     Nombre: ${a.nombre} <br>
@@ -71,9 +71,8 @@ if(element){
 }
 
 function mostrarCarrito(array) {
-  if(!p.classList.contains("hidden")){
-    p.classList.add("hidden")
-    console.log("se hizo")
+  if(!p.classList.contains("invisible")){
+    p.classList.add("invisible")
   }
   const producto = array.map(a => `<div id=${a.id} class="border p-2 rounded-xl flex flex-col justify-between h-full tarjeta"><img src=${a.img} class="object-cover">
     Nombre: ${a.nombre} <br>
@@ -150,7 +149,6 @@ const botonEliminar = () => {
     b.addEventListener("click", (e) => {
       const tarjeta = e.target.closest(".tarjeta");
       eliminarProducto(tarjeta.id)
-      console.log(tarjeta.id)
     })
   })
 }
@@ -158,6 +156,7 @@ const botonEliminar = () => {
 const eliminarProducto = (id) => {
   let idProductoEliminar = id
   if (carrito.some((p) => p.id == idProductoEliminar)) {
+    
     const producto = carrito.find(p => p.id == idProductoEliminar)
     const lugar = carrito.indexOf(producto)
     carrito.splice(lugar, 1);
@@ -186,39 +185,45 @@ const eliminarProducto = (id) => {
 
 const form = document.getElementById("form-carrito")
 if(form){
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const nombre = e.target[0].value.toLowerCase().trim();
-    e.target[0].value = "";
+  let nombre = ""  
+  form[1].addEventListener("submit", (e) => {
+    e.preventDefault()
+  })
+  form[0].addEventListener("input", (e) => {
+    nombre = e.target.value.toLowerCase().trim();
     buscarProducto(nombre, carrito)
-  })  
+  })
 }else{
   const form = document.getElementById("form-inicio")
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const nombre = e.target[0].value.toLowerCase().trim();
-    e.target[0].value = "";
+  let nombre = ""  
+  form[1].addEventListener("submit", (e) => {
+    e.preventDefault()
+  })
+  form[0].addEventListener("input", (e) => {
+    nombre = e.target.value.toLowerCase().trim();
     buscarProducto(nombre, productos)
-  }) 
+  })
 }
   
 const buscarProducto = (nombre, array) => {
   let existe = array.some((p) => p.nombre.toLowerCase() === nombre);
-
-  if (existe === true && array === carrito) {
-    const productoEncontrado = [array.find((p) => p.nombre.toLowerCase() === nombre)];
-    mostrarCarrito(productoEncontrado)
-  }else if(existe === true && array === productos){
-    const productoEncontrado = [array.find((p) => p.nombre.toLowerCase() === nombre)];
-    mostrarProductos(productoEncontrado)
-  } else if(existe === false && array === carrito){
-    mostrarCarrito([]);
-    p.textContent = "El nombre ingresado no concuerda con ningún producto";
-    p.classList.remove("hidden");
+  const concuerda = array.filter((p) => p.nombre.toLowerCase().includes(nombre))
+  if(concuerda.length > 0 && array === carrito){
+    mostrarCarrito(concuerda)
+  }else if(concuerda.length > 0 && array === productos){
+    mostrarProductos(concuerda)
   }else{
-    mostrarProductos([]);
-    p.textContent = "El nombre ingresado no concuerda con ningún producto";
-    p.classList.remove("hidden");
+    if (existe === true && array === carrito) {
+      const productoEncontrado = [array.find((p) => p.nombre.toLowerCase() === nombre)];
+      mostrarCarrito(productoEncontrado)
+    }else if(existe === true && array === productos){
+      const productoEncontrado = [array.find((p) => p.nombre.toLowerCase() === nombre)];
+      mostrarProductos(productoEncontrado)
+    } else if(existe === false && array === carrito){
+      p.classList.remove("invisible");
+    }else{
+      p.classList.remove("invisible");
+    }
   }
 };
 
@@ -251,7 +256,6 @@ if(select){
 
 const filtrarProductosPrecio = (min, max, array) => {
   const productosFiltrados = array.filter((p) => p.precio <= max && p.precio >= min);
-  console.log(select)
   if(select !== null){
     mostrarCarrito(productosFiltrados)
   }else{
