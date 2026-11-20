@@ -82,14 +82,24 @@ Cantidad: ${a.stock}
 <button class="self-center border rounded-xl  p-1 eliminar" >Eliminar</button>
 </div>
 </div>`).join("");/* Cantidad a comprar */
-
+  const msgCarrito = document.getElementById("mensaje-carrito")
+  if(producto.length === 0 && msgCarrito){
+    console.log("true")
+    msgCarrito.classList.remove("invisible")
+  }else if(producto.length > 0 && msgCarrito){
+    console.log("false")
+    msgCarrito.classList.add("invisible")
+  }
+  
   const element = document.getElementById("carrito");
-  element.innerHTML = "";
-  const newElement = document.createElement("div")
-  newElement.className="grid grid-cols-3 gap-4";
-  newElement.innerHTML = producto;
-  element.appendChild(newElement);
-  botonEliminar()
+  if(element){
+    element.innerHTML = "";
+    const newElement = document.createElement("div")
+    newElement.className="grid grid-cols-3 gap-4";
+    newElement.innerHTML = producto;
+    element.appendChild(newElement);
+    botonEliminar()
+  }
 }
 
 /*Agregar Producto al carrito */
