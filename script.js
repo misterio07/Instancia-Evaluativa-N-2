@@ -313,19 +313,10 @@ const buscarProducto = (nombre, array) => {
   }
 };
 
-const select = document.getElementById("filtro-carrito")
+const select = document.getElementById("filtro-inicio")
 
 if (select) {
-  select.addEventListener("change", () => {
-    if (select.value === "Todos") {
-      mostrarCarrito(carrito);
-    } else {
-     
-      actualizarProductos()
-    }
-  })
-} else {
-  const select = document.getElementById("filtro-inicio")
+  
   select.addEventListener("change", () => {
     if (select.value === "Todos") {
       mostrarProductos(productos);
@@ -333,15 +324,16 @@ if (select) {
 
       actualizarProductos()
     }
-  })
-}/* y el carrito del inicio tmb? */
+} 
+)}
 
 
 
 
 
-//////////////////////////////////////////////ORDENAR PRODUCTOS
-/*Guille completar y agregar */
+
+//ORDENAR PRODUCTOS//
+
 function actualizarProductos() {
 
   const filtro = document.getElementById("filtro-inicio");
