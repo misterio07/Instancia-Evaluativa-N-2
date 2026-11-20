@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title>Productos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body class="bg-gray-200">
     
-<nav class="flex flex-wrap items-center justify-between gap-4 p-4 bg-gray-800 text-white ">
+<nav class="sticky top-0 z-5 flex flex-wrap items-center justify-between gap-4 p-4 bg-blue-700 text-white ">
 
     <!-- Enlaces -->
     <div class="flex items-center gap-5">
@@ -98,10 +99,60 @@
     </select>
 </div>
     <p class="hidden text-center text-xl font-medium" id="mensaje-error"></p>
-    <div id="resultado" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 justify-items-center max-w-6xl mx-auto p-3"></div>
+    <div id="resultado" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-items-center max-w-6xl mx-auto p-3"></div>
     </section>
     </main>
     
+<footer class="bg-blue-900 text-white mt-10">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+
+            <!-- Nombre -->
+            <div class="text-center md:text-left">
+                <h2 class="text-xl font-bold">
+                    Mi Tienda
+                </h2>
+                <p class="text-sm text-blue-200">
+                    Tu lugar para encontrar lo que necesitás.
+                </p>
+            </div>
+
+            <!-- Redes sociales -->
+            <div class="flex items-center gap-6 text-2xl">
+
+                <a href="#" aria-label="WhatsApp"
+                   class="hover:text-green-400 transition duration-300">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+
+                <a href="#" aria-label="Instagram"
+                   class="hover:text-pink-400 transition duration-300">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="#" aria-label="X"
+                   class="hover:text-gray-300 transition duration-300">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+
+                <a href="#" aria-label="YouTube"
+                   class="hover:text-red-400 transition duration-300">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+
+            </div>
+        </div>
+
+        <hr class="my-6 border-blue-700">
+
+        <div class="text-center text-sm text-blue-200">
+            © 2026 Mi Tienda. Todos los derechos reservados.
+        </div>
+
+    </div>
+</footer>
+
     <script src="script.js"></script>
 </body>
 </html>
