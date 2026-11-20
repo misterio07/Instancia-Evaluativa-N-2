@@ -25,7 +25,7 @@
     <form class="flex flex-1 min-w-[180px] max-w-md gap-2"
           id="form-carrito">
 
-        <input type="text"
+        <input type="search"
                class="w-full min-w-0 bg-white text-black rounded-md px-3 py-2"
                placeholder="Buscar producto...">
 
@@ -85,11 +85,14 @@
                 <option value="0-25000">0 - 25000</option>
                 <option value="25000-100000">25000 - 100000</option>
                 <option value="100000-300000">100000 - 300000</option>
-            </select>  -->
-        </div>
-            <div id="carrito" class="flex flex-wrap justify-center gap-6 p-4 w-full"></div>
+            </select>
+        </nav>
+        <main>
+             <p class="invisible text-center text-xl my-2 font-medium" id="mensaje-error">El nombre ingresado no concuerda con ningún producto</p>
+             <p class="invisible text-center text-xl my-2 font-medium" id="mensaje-carrito">El carrito esta vacio</p>
+            <section class="flex flex-wrap justify-center gap-6 p-4 w-full" id="carrito">
             </section>
-            <p class="hidden text-center text-xl font-medium" id="mensaje-error"></p>
+           
         </main>
         <footer class="bg-blue-900 text-white mt-10 sticky bottom-0 z-5">
     <div class="max-w-7xl mx-auto px-4 py-8">
