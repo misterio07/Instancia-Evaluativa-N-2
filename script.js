@@ -119,12 +119,12 @@ function mostrarCarrito(array) {
     Eliminar
   </button>
   <div class="w-8 flex justify-center">
-    ${productos.find(p => p.id == a.id).stock > a.cantidad ? `
+    ${productos.find(p => p.id == a.id).stock === 0 ? "" :`
       <button data-id="${a.id}" data-accion="sumar"
       class="rounded-lg px-3 py-1 text-blue-700 text-2xl">
         +
       </button>
-    ` : ""}
+    ` }
   </div>
 </div>
 </div>
