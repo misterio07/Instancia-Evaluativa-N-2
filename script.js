@@ -298,8 +298,8 @@ if(form){
     nombre = e.target.value.toLowerCase().trim();
     buscarProducto(nombre, productos)
   })
-  })
-}
+  }
+
 
 const buscarProducto = (nombre, array) => {
   let existe = array.some((p) => p.nombre.toLowerCase() === nombre);
