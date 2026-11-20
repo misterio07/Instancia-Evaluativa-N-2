@@ -98,7 +98,7 @@ function mostrarCarrito(array) {
     p.classList.add("hidden")
     console.log("se hizo")
   }
-  const producto = array.map(a => `<div id=${a.id} class="border bg-white p-2 rounded-xl flex flex-col justify-between h-[350px] w-[220px] tarjeta hover:scale-105 hover:transition-all duration-300">
+  const producto = array.map(a => `<div id=${a.id} class="border bg-white p-2 rounded-xl flex flex-col justify-between h-[370px] w-[220px] tarjeta hover:scale-105 hover:transition-all duration-300">
    <div class="bg-white">
       <img src="${a.img}" 
       class="w-full h-[160px] object-contain rounded-lg">
@@ -106,7 +106,8 @@ function mostrarCarrito(array) {
       <div class="flex flex-col gap-2 mt-3">
         <h3 class="font-bold text-lg">${a.nombre}</h3>
         <p class="text-gray-700">Precio: $${a.precio}</p>
-        <p class="text-gray-600">Stock: ${a.cantidad}</p>
+         <p class="text-gray-700">Precio Total: $${a.precio * a.cantidad}</p>
+        <p class="text-gray-600">Cantidad: ${a.cantidad}</p>
       </div>
     <div class="flex items-center justify-center gap-3 mt-4">
  <div class="flex items-center justify-center gap-3">
