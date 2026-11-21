@@ -90,6 +90,8 @@ if (element) {
   mostrarProductos(productos)
   actualizarContador()
 }
+const confirmarCompra = document.getElementById("confirmar-compra")
+const msgCompra = document.getElementById("texto-compra");
 function mostrarCarrito(array) {
   if(!p.classList.contains("invisible")){
     p.classList.add("invisible")
@@ -112,8 +114,7 @@ function mostrarCarrito(array) {
       <button data-id="${a.id}" data-accion="restar"
       class="rounded-lg px-3 py-1 text-blue-700 text-2xl">
         -
-      </button>
-    ` : ""}
+      </button>` : ""}
   </div>
   <button class="border rounded-xl p-1 eliminar bg-yellow-300 hover:bg-yellow-400">
     Eliminar
@@ -128,16 +129,22 @@ function mostrarCarrito(array) {
   </div>
 </div>
 </div>
-</div>`).join("");/* Cantidad a comprar */
+</div>`).join("");
+
   const msgCarrito = document.getElementById("mensaje-carrito")
   if(producto.length === 0 && msgCarrito){
-    console.log("true")
     msgCarrito.classList.remove("invisible")
+    confirmarCompra.classList.add("invisible")
   }else if(producto.length > 0 && msgCarrito){
-    console.log("false")
     msgCarrito.classList.add("invisible")
+    if(confirmarCompra && msgCompra){
+      confirmarCompra.classList.remove("invisible")
+
+      let totalCarrito = calcularTotal(carrito)
+      msgCompra.textContent = `Total del carrito: $${totalCarrito}`;
+    }
   }
-  
+
   const element = document.getElementById("carrito");
   if (element) {
     element.innerHTML = "";
@@ -150,6 +157,12 @@ function mostrarCarrito(array) {
     actualizarContador()
   }
 }
+const botonComprar = document.querySelector("#confirmar-compra button")
+if(botonComprar){
+  botonComprar.addEventListener("click", (e) => {
+    console.log(e)
+    alert("Gracias por su compra!")
+})}
 function botonesCantidad(contenedor, array) {
   contenedor.addEventListener("click", (e) => {
     const boton = e.target.closest("[data-accion]");
@@ -260,7 +273,6 @@ const eliminarProducto = (id) => {
   if (carrito.some(p => p.id == id)) {
     const producto = carrito.find(p => p.id == id);
     const productoOriginal = productos.find(p => p.id == id);
-
     productoOriginal.stock += producto.cantidad;
 
     const lugar = carrito.indexOf(producto);
@@ -269,7 +281,6 @@ const eliminarProducto = (id) => {
     
     localStorage.setItem("productos", JSON.stringify(productos));
     localStorage.setItem("carrito", JSON.stringify(carrito));
-
     mostrarCarrito(carrito);
 
   }
@@ -394,21 +405,15 @@ if (orden) {
 
 
 function calcularTotal(carrito) {
-
   if (carrito.length === 0) {
-    alert("El carrito está vacío");
-    return 0;
+    return;
   }
 
   let total = carrito.reduce(function (acumulador, producto) {
     return acumulador + (producto.precio * producto.cantidad);
   }, 0);
 
-  alert("Total de la compra: $" + total.toFixed(2));
-
   return total;
 }
-
-
 
 mostrarCarrito(carrito)
